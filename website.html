@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gourmet Haven | Fine Dining Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary: #c53b2a;
+            --secondary: #1a1a1a;
+            --accent: #f8b345;
+            --light: #f9f9f9;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--secondary);
+            background-color: var(--light);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('istockphoto-1829241109-612x612.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 85vh;
+        }
+        
+        .dish-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-link:hover {
+            color: var(--accent);
+        }
+        
+        .menu-category.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .reservation-form input:focus, .reservation-form select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        
+        .special-dish::before {
+            content: "★";
+            color: var(--accent);
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-hidden {
+                display: none;
+            }
+            
+            .hero {
+                min-height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="bg-black text-white fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold font-playfair">Gourmet Haven</h1>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-accent transition">Home</a>
+                <a href="#menu" class="nav-link text-white hover:text-accent transition">Menu</a>
+                <a href="#about" class="nav-link text-white hover:text-accent transition">Our Story</a>
+                <a href="#contact" class="nav-link text-white hover:text-accent transition">Reservations</a>
+                <a href="#gallery" class="nav-link text-white hover:text-accent transition">Gallery</a>
+            </div>
+            
+            <div class="flex space-x-4">
+                <button class="bg-primary hover:bg-primary-dark px-4 py-2 rounded-full transition">Reservations</button>
+                <button class="md:hidden text-white" id="mobileMenuButton">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-black hidden" id="mobileMenu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#home" class="nav-link text-white hover:text-accent transition py-2">Home</a>
+                <a href="#menu" class="nav-link text-white hover:text-accent transition py-2">Menu</a>
+                <a href="#about" class="nav-link text-white hover:text-accent transition py-2">About</a>
+                <a href="#contact" class="nav-link text-white hover:text-accent transition py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero flex items-center justify-center pt-16" id="home">
+        <div class="text-center text-white px-4">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 font-playfair">Experience Culinary Excellence</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Where tradition meets innovation in every bite</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-primary hover:bg-primary-dark px-6 py-3 rounded-full transition transform hover:scale-105">
+                    View Our Menu
+                </button>
+                <button class="bg-white text-black hover:bg-gray-200 px-6 py-3 rounded-full transition transform hover:scale-105">
+                    Make Reservation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dishes -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 font-playfair">Chef's Specialties</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Seasonal dishes crafted with locally-sourced ingredients</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Dish Card 1 -->
+                <div class="dish-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7b7999f7-ee44-4126-ba59-b7d0f2dfa812.png" 
+                             alt="House-made truffle ravioli with wild mushrooms and cream sauce"
+                             class="w-full h-64 object-cover">
+                        <span class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm">Chef's Special</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Truffle Ravioli</h3>
+                        <p class="text-gray-600 mb-4">House-made pasta filled with black truffle and ricotta</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">$24</span>
+                            <button class="bg-accent hover:bg-yellow-500 text-white px-4 py-2 rounded-full transition">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dish Card 2 -->
+                <div class="dish-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f2eb20e7-fa04-4144-a5b1-6bf4886c6f6b.png" 
+                             alt="Premium grass-fed filet mignon with truffle butter and seasonal vegetables"
+                             class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Filet Mignon</h3>
+                        <p class="text-gray-600 mb-4">Grass-fed beef with truffle butter and seasonal vegetables</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">$36</span>
+                            <button class="bg-accent hover:bg-yellow-500 text-white px-4 py-2 rounded-full transition">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dish Card 3 -->
+                <div class="dish-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7571e48e-a7fe-4fc6-a366-99f3ebe7032b.png" 
+                             alt="Creamy lobster bisque with sherry cream and fresh herbs"
+                             class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Lobster Bisque</h3>
+                        <p class="text-gray-600 mb-4">Creamy bisque with sherry cream and fresh herbs</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">$18</span>
+                            <button class="bg-accent hover:bg-yellow-500 text-white px-4 py-2 rounded-full transition">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dish Card 4 -->
+                <div class="dish-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/563036ee-e942-4b29-8ed6-81553007218e.png" 
+                             alt="Warm chocolate soufflé with vanilla bean ice cream"
+                             class="w-full h-64 object-cover">
+                        <span class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm">Popular</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Chocolate Soufflé</h3>
+                        <p class="text-gray-600 mb-4">Warm chocolate soufflé with vanilla bean ice cream</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">$14</span>
+                            <button class="bg-accent hover:bg-yellow-500 text-white px-4 py-2 rounded-full transition">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-full transition transform hover:scale-105">
+                    View Full Menu
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section class="py-16 bg-white" id="about">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-12">
+                    <h2 class="text-3xl font-bold mb-6 font-playfair">Our Story</h2>
+                    <p class="text-gray-600 mb-4">
+                        Founded in 2010, Gourmet Haven began as a small bistro with a passion for locally sourced ingredients and innovative culinary techniques. What started as a humble neighborhood restaurant has grown into an award-winning dining destination.
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        Our philosophy is simple: respect for tradition while embracing innovation. Chef Michael Harrison and his team craft each dish with meticulous attention to detail, ensuring every meal is a memorable experience.
+                    </p>
+                    <button class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-full transition">
+                        Meet Our Team
+                    </button>
+                </div>
+                <div class="lg:w-1/2">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/57976f3b-1e59-4267-bd8a-2d3872ee265c.png" 
+                         alt="Elegant restaurant interior with warm lighting and modern decor"
+                         class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+            
+            <!-- Team Section -->
+            <div class="mt-20">
+                <h2 class="text-3xl font-bold mb-12 text-center font-playfair">Meet Our Team</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Team Member 1 -->
+                    <div class="text-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/887659f5-d17c-430c-8c91-7dba99d4579a.png" 
+                             alt="Head chef Michael Harrison in his kitchen"
+                             class="rounded-full w-48 h-48 object-cover mx-auto mb-4">
+                        <h3 class="text-xl font-semibold">Michael Harrison</h3>
+                        <p class="text-gray-600 mb-2">Executive Chef</p>
+                        <p class="text-sm text-gray-500">James Beard Award Winner, 2018</p>
+                    </div>
+                    
+                    <!-- Team Member 2 -->
+                    <div class="text-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b4332703-c0fb-4354-9df0-7aaf6d859e42.png" 
+                             alt="Sommelier Anna Rodriguez selecting wine"
+                             class="rounded-full w-48 h-48 object-cover mx-auto mb-4">
+                        <h3 class="text-xl font-semibold">Anna Rodriguez</h3>
+                        <p class="text-gray-600 mb-2">Sommelier</p>
+                        <p class="text-sm text-gray-500">Certified Master Sommelier</p>
+                    </div>
+                    
+                    <!-- Team Member 3 -->
+                    <div class="text-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3adeaf33-7c1d-408a-9b01-5103f76ceb10.png" 
+                             alt="Pastry chef Sarah Chen decorating desserts"
+                             class="rounded-full w-48 h-48 object-cover mx-auto mb-4">
+                        <h3 class="text-xl font-semibold">Sarah Chen</h3>
+                        <p class="text-gray-600 mb-2">Pastry Chef</p>
+                        <p class="text-sm text-gray-500">Featured in Dessert Magazine</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="py-16 bg-gray-100" id="menu">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 font-playfair">Our Menu</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Seasonal offerings crafted with local ingredients</p>
+            </div>
+            
+            <!-- Menu Categories -->
+            <div class="flex overflow-x-auto pb-4 mb-8 scrollbar-hide">
+                <div class="flex space-x-2 mx-auto">
+                    <button class="menu-category px-6 py-2 rounded-full bg-white hover:bg-primary hover:text-white transition">Appetizers</button>
+                    <button class="menu-category px-6 py-2 rounded-full bg-primary text-white">Main Courses</button>
+                    <button class="menu-category px-6 py-2 rounded-full bg-white hover:bg-primary hover:text-white transition">Desserts</button>
+                    <button class="menu-category px-6 py-2 rounded-full bg-white hover:bg-primary hover:text-white transition">Drinks</button>
+                    <button class="menu-category px-6 py-2 rounded-full bg-white hover:bg-primary hover:text-white transition">Specialties</button>
+                </div>
+            </div>
+            
+            <!-- Menu Items -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Main Course Items -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 border-b pb-2">Main Courses</h3>
+                    
+                    <div class="space-y-4">
+                        <!-- Item 1 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium special-dish">Filet Mignon</h4>
+                                <p class="text-sm text-gray-500">Grass-fed beef, truffle butter, seasonal vegetables</p>
+                            </div>
+                            <span class="font-semibold">$36</span>
+                        </div>
+                        
+                        <!-- Item 2 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium">Pan-Seared Salmon</h4>
+                                <p class="text-sm text-gray-500">Wild-caught salmon, lemon beurre blanc, asparagus</p>
+                            </div>
+                            <span class="font-semibold">$28</span>
+                        </div>
+                        
+                        <!-- Item 3 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium">Mushroom Risotto</h4>
+                                <p class="text-sm text-gray-500">Arborio rice, wild mushrooms, parmesan, truffle oil</p>
+                            </div>
+                            <span class="font-semibold">$24</span>
+                        </div>
+                        
+                        <!-- Item 4 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium special-dish">Duck Confit</h4>
+                                <p class="text-sm text-gray-500">Slow-cooked duck leg, cherry reduction, potato purée</p>
+                            </div>
+                            <span class="font-semibold">$32</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Side Dishes -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 border-b pb-2">Side Dishes</h3>
+                    
+                    <div class="space-y-4">
+                        <!-- Item 1 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium">Truffle Fries</h4>
+                                <p class="text-sm text-gray-500">Hand-cut potatoes, truffle oil, parmesan</p>
+                            </div>
+                            <span class="font-semibold">$12</span>
+                        </div>
+                        
+                        <!-- Item 2 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium">Grilled Asparagus</h4>
+                                <p class="text-sm text-gray-500">Fresh asparagus, lemon zest, olive oil</p>
+                            </div>
+                            <span class="font-semibold">$10</span>
+                        </div>
+                        
+                        <!-- Item 3 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium">Creamed Spinach</h4>
+                                <p class="text-sm text-gray-500">Baby spinach, garlic cream sauce</p>
+                            </div>
+                            <span class="font-semibold">$9</span>
+                        </div>
+                        
+                        <!-- Item 4 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium">Mushroom Medley</h4>
+                                <p class="text-sm text-gray-500">Assorted wild mushrooms, herbs, butter</p>
+                            </div>
+                            <span class="font-semibold">$11</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Appetizers -->
+                <div class="bg-white p-6 rounded-lg shadow-sm md:col-span-2">
+                    <h3 class="text-xl font-semibold mb-4 border-b pb-2">Appetizers</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Item 1 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium special-dish">Truffle Ravioli</h4>
+                                <p class="text-sm text-gray-500">House-made pasta, black truffle, ricotta</p>
+                            </div>
+                            <span class="font-semibold">$18</span>
+                        </div>
+                        
+                        <!-- Item 2 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium">Bruschetta</h4>
+                                <p class="text-sm text-gray-500">Toasted bread, heirloom tomatoes, basil</p>
+                            </div>
+                            <span class="font-semibold">$14</span>
+                        </div>
+                        
+                        <!-- Item 3 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium">Crispy Calamari</h4>
+                                <p class="text-sm text-gray-500">Tender squid, spicy aioli, lemon</p>
+                            </div>
+                            <span class="font-semibold">$16</span>
+                        </div>
+                        
+                        <!-- Item 4 -->
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="font-medium">Burrata Salad</h4>
+                                <p class="text-sm text-gray-500">Fresh burrata, heirloom tomatoes, basil</p>
+                            </div>
+                            <span class="font-semibold">$17</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-full transition transform hover:scale-105">
+                    Download Full Menu (PDF)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="py-16 bg-black text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-4 text-center font-playfair">Book Your Table</h2>
+                <p class="text-gray-300 mb-8 text-center">Experience fine dining at its best - reserve your table today</p>
+                
+                <form class="reservation-form grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block mb-2">Full Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border-gray-700 focus:border-accent">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block mb-2">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border-gray-700 focus:border-accent">
+                    </div>
+                    
+                    <div>
+                        <label for="phone" class="block mb-2">Phone Number</label>
+                        <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border-gray-700 focus:border-accent">
+                    </div>
+                    
+                    <div>
+                        <label for="guests" class="block mb-2">Number of Guests</label>
+                        <select id="guests" class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border-gray-700 focus:border-accent">
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5+ People</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="date" class="block mb-2">Date</label>
+                        <input type="date" id="date" class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border-gray-700 focus:border-accent">
+                    </div>
+                    
+                    <div>
+                        <label for="time" class="block mb-2">Time</label>
+                        <select id="time" class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border-gray-700 focus:border-accent">
+                            <option value="17:00">5:00 PM</option>
+                            <option value="17:30">5:30 PM</option>
+                            <option value="18:00">6:00 PM</option>
+                            <option value="18:30">6:30 PM</option>
+                            <option value="19:00">7:00 PM</option>
+                            <option value="19:30">7:30 PM</option>
+                            <option value="20:00">8:00 PM</option>
+                            <option value="20:30">8:30 PM</option>
+                            <option value="21:00">9:00 PM</option>
+                        </select>
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <label for="note" class="block mb-2">Special Requests</label>
+                        <textarea id="note" rows="3" class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border-gray-700 focus:border-accent"></textarea>
+                    </div>
+                    
+                    <div class="md:col-span-2 text-center">
+                        <button type="submit" class="bg-accent hover:bg-yellow-500 text-black px-8 py-3 rounded-full transition transform hover:scale-105">
+                            Reserve Now
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16 bg-white" id="contact">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2 font-playfair">Contact Us</h2>
+                <p class="text-gray-600">We'd love to hear from you</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Contact Information -->
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-primary mr-4 pt-1">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">Address</h3>
+                                <p class="text-gray-600">456 Epicurean Way<br>Gourmet Quarter<br>New York, NY 10001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-primary mr-4 pt-1">
+                                <i class="fas fa-phone-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">Phone</h3>
+                                <p class="text-gray-600">+1 (212) 555-1234<br>+1 (212) 555-5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-primary mr-4 pt-1">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">Email</h3>
+                                <p class="text-gray-600">reservations@gourmethaven.com<br>info@gourmethaven.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-primary mr-4 pt-1">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">Hours</h3>
+                                <p class="text-gray-600">
+                                    Monday - Thursday: 5PM - 10PM<br>
+                                    Friday - Saturday: 5PM - 11PM<br>
+                                    Sunday: 5PM - 9PM
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="mt-8">
+                        <h3 class="font-semibold mb-4">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-600 hover:text-primary transition text-xl">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-primary transition text-xl">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-primary transition text-xl">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-primary transition text-xl">
+                                <i class="fab fa-tripadvisor"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <form class="space-y-4">
+                        <div>
+                            <label for="contact-name" class="block mb-2 font-medium">Your Name</label>
+                            <input type="text" id="contact-name" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-primary">
+                        </div>
+                        
+                        <div>
+                            <label for="contact-email" class="block mb-2 font-medium">Email Address</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-primary">
+                        </div>
+                        
+                        <div>
+                            <label for="contact-subject" class="block mb-2 font-medium">Subject</label>
+                            <input type="text" id="contact-subject" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-primary">
+                        </div>
+                        
+                        <div>
+                            <label for="contact-message" class="block mb-2 font-medium">Message</label>
+                            <textarea id="contact-message" rows="4" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-primary"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full transition">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Map -->
+            <div class="mt-12 rounded-lg overflow-hidden">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2151283754106!2d-73.98700772448712!3d40.750875271386495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1686507410483!5m2!1sen!2sus" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 font-playfair">What Our Guests Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Hear from our satisfied customers about their dining experiences</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f79ab4a2-8ea5-4637-bb7a-330f83b3bcf3.png" 
+                             alt="Jessica Thompson smiling"
+                             class="rounded-full w-12 h-12 object-cover mr-4">
+                        <div>
+                            <h4 class="font-semibold">Jessica Thompson</h4>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "The Filet Mignon was cooked to perfection - the best I've ever had! The service was impeccable and the ambiance made our anniversary dinner truly special."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ff0ecbb9-b14f-4f7e-bf9f-c093b0867fcf.png" 
+                             alt="David Rodriguez enjoying wine"
+                             class="rounded-full w-12 h-12 object-cover mr-4">
+                        <div>
+                            <h4 class="font-semibold">David Rodriguez</h4>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "The sommelier's wine pairing recommendation was spot on. Every dish was a culinary masterpiece, and the dessert... that chocolate soufflé is worth coming back for!"
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/50749a82-ce0b-4730-805a-0e0a8d3b5130.png" 
+                             alt="Sarah Chen celebrating"
+                             class="rounded-full w-12 h-12 object-cover mr-4">
+                        <div>
+                            <h4 class="font-semibold">Sarah Chen</h4>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "Perfect spot for our business dinner. The private dining area was elegant and comfortable, and the presentation of each course impressed our clients."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4 font-playfair">Gourmet Haven</h3>
+                    <p class="text-gray-400 mb-4">
+                        Where every meal is a culinary journey crafted with passion and excellence.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#menu" class="text-gray-400 hover:text-white transition">Menu</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>123 Culinary Avenue, NY 10001</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-phone-alt mr-2"></i>
+                            <span>+1 (212) 555-1234</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>info@gourmethaven.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h4 class="font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">
+                        Subscribe to receive updates on special events and promotions.
+                    </p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg bg-gray-800 text-white w-full">
+                        <button class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2023 Gourmet Haven. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Form submission handling
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // In a real implementation, you would handle AJAX submission here
+                alert('Form submitted successfully!');
+                this.reset();
+            });
+        });
+        
+        // Menu category switching
+        const menuCategories = document.querySelectorAll('.menu-category');
+        menuCategories.forEach(category => {
+            category.addEventListener('click', function() {
+                menuCategories.forEach(c => c.classList.remove('bg-primary', 'text-white'));
+                this.classList.add('bg-primary', 'text-white');
+            });
+        });
+        
+        // Today's date for reservation calendar
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+        
+        // Cart functionality would be implemented here in a real application
+        document.querySelectorAll('button:contains("Add to Cart")').forEach(button => {
+            button.addEventListener('click', function() {
+                const dishName = this.closest('.dish-card').querySelector('h3').textContent;
+                alert(`${dishName} added to cart!`);
+            });
+        });
+    </script>
+</body>
+</html>
